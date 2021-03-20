@@ -72,7 +72,9 @@ const generateHint = (guess) => {
       solutionArr[targetIndex] = null;
     }
   }
-
+  //Return results- alternative draft:
+  //   let hint = correctLetterLocations.toString() + "-" + correctLetters.toString();
+  // return hint;
   //Return results?? - syntax looks okay??
   return correctLetter + '-' + correctLetterLocations;
 }

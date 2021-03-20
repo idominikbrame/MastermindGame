@@ -33,47 +33,48 @@ const addHint = (guess) => {
   let hint = generateHint(guess);
 }
 
-function mastermind(guess) {
-  const solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
+const mastermind = (guess) => {
   board.push(guess);
   if (guess === solution){
-    return "Correct!"
-  } else if (guess.length === 4 && guess !==solution){
+    return 'You guessed it!';
+  }
+  else if (guess.length === 4 && guess !== solution){
     generateHint(guess);
     addHint(guess);
   }
 }
 
-function generateHint(guess) {
-  // your code here
-
+//Generate Hint
+const generateHint = (guess) => {
+  //your code here
   let solutionArr = solution.split('');
   let guessArr = guess.split('');
-  let correctLetterSpot = 0;
+  let correctLetterLocations = 0;
   let correctLetter = 0;
 
-//Location Accuracy?
+  //Check location accuracy
+  for(let i = 0; i < 4; i++)
+  {
+    if(solutionArr[i] === guessArr[i])
+    {
+      correctLetterLocations++;
+      solutionArr[i] = null;
+    }
+  }
 
-for(let i = 0; i < 4; i++){
-  if(solutionArr[1] == guessArr[i]){
-  correctLetterSpot++;
-  solutionArr[i] = null;
-}
-}
+  //Check letter accuracy
+  for(let i = 0; i < 4; i++)
+  {
+    let targetIndex = solutionArr.indexOf(guessArr[i]);
+    if(targetIndex > -1)
+    {
+      correctLetter++;
+      solutionArr[targetIndex] = null;
+    }
+  }
 
-//Letter Accuracy?
-
-for(let i = 0; i <4; i++){
-  let targetIndex = solutionArr = solutionArr.indexOf(guessArr[i]);
-  if(targetIndex > -1){
-    correctLetter++;
-    solutionArr[targetIndex] = null;
-  } 
-}
-
-//Results
-return correctLetter + '-' + correctLetterSpot;
+  //Return results?? - syntax looks okay??
+  return correctLetter + '-' + correctLetterLocations;
 }
 
 function getPrompt() {

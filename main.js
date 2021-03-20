@@ -11,6 +11,7 @@ let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
+
 function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
@@ -28,15 +29,52 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint() {
-  // your code here
+const addHint = (guess) => {
+  let hint = generateHint(guess);
 }
 
 function mastermind(guess) {
-  solution = 'abcd'; // Comment this out to generate a random solution
+  const solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+  board.push(guess);
+  if (guess === solution){
+    return "Correct!"
+  } else if (guess.length === 4 && guess !==solution){
+    generateHint(guess);
+    addHint(guess);
+  }
 }
 
+function generateHint(guess) {
+  // your code here
+
+  let solutionArr = solution.split('');
+  let guessArr = guess.split('');
+  let correctLetterSpot = 0;
+  let correctLetter = 0;
+
+//Location Accuracy?
+
+for(let i = 0; i < 4; i++){
+  if(solutionArr[1] == guessArr[i]){
+  correctLetterSpot++;
+  solutionArr[i] = null;
+}
+}
+
+//Letter Accuracy?
+
+for(let i = 0; i <4; i++){
+  let targetIndex = solutionArr = solutionArr.indexOf(guessArr[i]);
+  if(targetIndex > -1){
+    correctLetter++;
+    solutionArr[targetIndex] = null;
+  } 
+}
+
+//Results
+return correctLetter + '-' + correctLetterSpot;
+}
 
 function getPrompt() {
   rl.question('guess: ', (guess) => {

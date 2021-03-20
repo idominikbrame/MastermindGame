@@ -1,10 +1,13 @@
 # Rachel's Code Plan:
 
-1. Create a new branch called "masterMind"
+1. Create a new branch called "masterMind" 
+**DONE
 
 1. Spec 0 - Define a test solution: Helpful suggestion: while developing you can  set a default solution for you to test against. At the top of mastermind(), simply set const solution = 'abcd'; as a global variable.
+**DONE
 
 1. Spec 1 - Detect a correct solution: In mastermind(), if the guess you passed in equals the solution, return 'You guessed it!';
+
 
 1. Spec 2 - Generate a hint: generateHint() should take one argument, guess.
 

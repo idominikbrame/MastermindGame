@@ -11,7 +11,6 @@ let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-
 function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
@@ -29,55 +28,43 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const addHint = (guess) => {
-  let hint = generateHint(guess);
-}
-
-const mastermind = (guess) => {
-  board.push(guess);
-  if (guess === solution){
-    return 'You guessed it!';
-  }
-  else if (guess.length === 4 && guess !== solution){
-    generateHint(guess);
-    addHint(guess);
-  }
-}
-
-//Generate Hint
-const generateHint = (guess) => {
-  //your code here
-  let solutionArr = solution.split('');
-  let guessArr = guess.split('');
-  let correctLetterLocations = 0;
+function generateHint(guess) {
+  let correctAnswer = solution.split("");
+  let guessAttempt = guess.split("");
+  let correctSpot = 0;
   let correctLetter = 0;
-
   //Check location accuracy
-  for(let i = 0; i < 4; i++)
-  {
-    if(solutionArr[i] === guessArr[i])
+  for(let i = 0; i < 4; i++) {
+    if(correctAnswer[i] === guessAttempt[i])
     {
-      correctLetterLocations++;
-      solutionArr[i] = null;
+      correctSpot++;
+      correctAnswer[i] = null;
     }
   }
 
   //Check letter accuracy
-  for(let i = 0; i < 4; i++)
-  {
-    let targetIndex = solutionArr.indexOf(guessArr[i]);
+  for(let i = 0; i < 4; i++) {
+    let targetIndex = correctAnswer.indexOf(guessAttempt[i]);
     if(targetIndex > -1)
     {
       correctLetter++;
-      solutionArr[targetIndex] = null;
+      correctAnswer[targetIndex] = null;
     }
   }
-  //Return results- alternative draft:
-  //   let hint = correctLetterLocations.toString() + "-" + correctLetters.toString();
-  // return hint;
-  //Return results?? - syntax looks okay??
-  return correctLetter + '-' + correctLetterLocations;
+
+  return correctLetter + '-' + correctSpot;
 }
+
+
+function mastermind(guess) {
+  board.push(guess);
+  if (guess === solution) {
+    return "You guessed it!"
+  } else if (guess.length === 4 && guess !== solution) {
+      generateHint(guess)
+  }
+}
+
 
 function getPrompt() {
   rl.question('guess: ', (guess) => {

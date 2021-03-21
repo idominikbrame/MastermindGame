@@ -1,3 +1,7 @@
+FORKED FROM RacMcT for the INIT files************
+
+
+
 # Rachel's Code Plan:
 
 1. Create a new branch called "masterMind" 
